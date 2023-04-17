@@ -1,7 +1,21 @@
 import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Header from "./components/Header";
+import Homepage from "./components/Homepage";
+import ReviewSearchPage from "./components/ReviewSearchPage";
+import UsersPage from "./components/UsersPage";
 
 function App() {
-  return <div className="App"></div>;
+  return (
+    <div className="App">
+      <Header />
+      <Routes>
+        <Route path="/" element={<Homepage />}></Route>
+        <Route path="/Reviews" element={<ReviewSearchPage />}></Route>
+        <Route path="/Users" element={<UsersPage />}></Route>
+      </Routes>
+    </div>
+  );
 }
 
 export default App;
