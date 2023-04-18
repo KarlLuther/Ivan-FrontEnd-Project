@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { fetchReviewById } from "../api";
 import IsLoadingComponent from "../supplementoryComponents/isLoadingPage";
 import { modifyDate } from "../api";
+import CommentsSection from "../supplementoryComponents/CommentsSection";
 
 const SpecificReviewPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -18,21 +19,24 @@ const SpecificReviewPage = () => {
 
   if (isLoading) return <IsLoadingComponent />;
   return (
-    <section>
-      <h2>{reviewToRender.title}</h2>
-      <p>
-        <span className="bold-text">{reviewToRender.category}</span>
-      </p>
-      <p>Date of Posting: {modifyDate(reviewToRender.created_at)}</p>
-      <img src={reviewToRender.review_img_url} alt={reviewToRender.title} />
-      <p>{reviewToRender.review_body}</p>
-      <p>
-        <span className="bold-text">Designer:</span> {reviewToRender.designer}
-      </p>
-      <p>
-        <span className="bold-text">Owner:</span> {reviewToRender.owner}
-      </p>
-    </section>
+    <div>
+      <section className="review-section">
+        <h2>{reviewToRender.title}</h2>
+        <p>
+          <span className="bold-text">{reviewToRender.category}</span>
+        </p>
+        <p>Date of Posting: {modifyDate(reviewToRender.created_at)}</p>
+        <img src={reviewToRender.review_img_url} alt={reviewToRender.title} />
+        <p>{reviewToRender.review_body}</p>
+        <p>
+          <span className="bold-text">Designer:</span> {reviewToRender.designer}
+        </p>
+        <p>
+          <span className="bold-text">Owner:</span> {reviewToRender.owner}
+        </p>
+      </section>
+      <CommentsSection review_id={review_id} />
+    </div>
   );
 };
 

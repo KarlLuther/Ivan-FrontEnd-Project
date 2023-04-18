@@ -38,3 +38,19 @@ header {
 .nav-link:hover {
   color: black;
 }
+
+/* /////////////////////// */
+/* SPECIFIC REVIEW PAGE */
+/* /////////////////////// */
+
+.comments-section {
+  margin-top: 40px;
+}
+
+/* /////////////////////// */
+/* COMMENT SECTION*/
+/* /////////////////////// */
+
+.comment-card {
+  margin-bottom: 20px;
+}
