@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { fetchItems, fetchCategories } from "../api";
+import IsLoadingComponent from "../supplementoryComponents/isLoadingPage";
+import { useNavigate } from "react-router-dom";
 
 const ReviewSearchPage = () => {
+  const navigate = useNavigate();
   const [listItems, setListItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categoriesList, setCategories] = useState([]);
@@ -19,16 +22,14 @@ const ReviewSearchPage = () => {
       setListItems(items);
     });
   }, [selectedCategory]);
-  if (isLoading)
-    return (
-      <section>
-        <p>
-          Hello! Sorry about this, but you data is still being loaded. Please
-          stand by 🙏, it will arrive as soon as possible🥹
-        </p>
-        <img src="./loadingCat.jpg" alt="a cute cat picture" />
-      </section>
-    );
+
+  const clickHandler = (event) => {
+    const buttonElem = event.target;
+    const desiredId = buttonElem.getAttribute("review_id");
+    navigate(`/Reviews/${desiredId}`);
+  };
+
+  if (isLoading) return <IsLoadingComponent />;
   return (
     <section>
       <h2>Review Search Page</h2>
@@ -66,6 +67,9 @@ const ReviewSearchPage = () => {
               <p>Author: {owner}</p>
               <p>Category: {category}</p>
               <p>Votes: {votes}</p>
+              <button onClick={clickHandler} review_id={review_id}>
+                See this review
+              </button>
             </li>
           );
         })}
