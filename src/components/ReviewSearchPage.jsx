@@ -5,10 +5,12 @@ const ReviewSearchPage = () => {
   const [listItems, setListItems] = useState([]);
   const [selectedCategory, setSelectedCategory] = useState("");
   const [categoriesList, setCategories] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     fetchCategories().then((categories) => {
       setCategories(categories);
+      setIsLoading(false);
     });
   }, []);
 
@@ -17,6 +19,16 @@ const ReviewSearchPage = () => {
       setListItems(items);
     });
   }, [selectedCategory]);
+  if (isLoading)
+    return (
+      <section>
+        <p>
+          Hello! Sorry about this, but you data is still being loaded. Please
+          stand by 🙏, it will arrive as soon as possible🥹
+        </p>
+        <img src="./loadingCat.jpg" alt="a cute cat picture" />
+      </section>
+    );
   return (
     <section>
       <h2>Review Search Page</h2>
