@@ -15,7 +15,7 @@ const ReviewSearchPage = () => {
   }, []);
 
   useEffect(() => {
-    fetchItems(selectedCategory).then((items) => {
+    fetchItems().then((items) => {
       setListItems(items);
     });
   }, [selectedCategory]);
