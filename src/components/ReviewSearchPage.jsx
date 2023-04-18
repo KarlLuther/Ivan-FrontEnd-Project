@@ -37,15 +37,3 @@ const ReviewSearchPage = () => {
 };
 
 export default ReviewSearchPage;
-
-// {
-//   title: 'Agricola',
-//   designer: 'Uwe Rosenberg',
-//   owner: 'mallionaire',
-//   review_img_url:
-//     'https://images.pexels.com/photos/974314/pexels-photo-974314.jpeg?w=700&h=700',
-//   review_body: 'Farmyard fun!',
-//   category: 'euro game',
-//   created_at: new Date(1610964020514),
-//   votes: 1
-// },
