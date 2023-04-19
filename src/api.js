@@ -26,3 +26,9 @@ export const modifyDate = (date) => {
   const requiredData = date.slice(0, 10);
   return requiredData;
 };
+
+export const fetchComments = (review_id) => {
+  return ncGamesApi.get(`/reviews/${review_id}/comments`).then((response) => {
+    return response.data.comments;
+  });
+};
