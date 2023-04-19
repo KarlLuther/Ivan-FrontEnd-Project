@@ -32,3 +32,14 @@ export const fetchComments = (review_id) => {
     return response.data.comments;
   });
 };
+
+export const patchReviewVotes = (review_id, number) => {
+  return ncGamesApi
+    .patch(`/reviews/${review_id}`, {
+      inc_votes: number,
+    })
+    .then((response) => {
+      console.log(response);
+      return response.data.review;
+    });
+};
