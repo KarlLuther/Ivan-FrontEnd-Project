@@ -31,7 +31,7 @@ const ReviewSearchPage = () => {
 
   if (isLoading) return <IsLoadingComponent />;
   return (
-    <section>
+    <section className="component-container">
       <h2>Review Search Page</h2>
       <form id="category-filter">
         <label htmlFor="categorys">sort by categorys : </label>

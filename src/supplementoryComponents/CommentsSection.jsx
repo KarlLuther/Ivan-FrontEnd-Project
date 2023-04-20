@@ -1,50 +1,33 @@
 import { useEffect, useState } from "react";
 import { fetchComments, modifyDate } from "../api";
-import { postNewComment } from "../api";
+import PostCommentComponent from "../supplementoryComponents/PostNewComment";
 
 const CommentsSection = ({ review_id }) => {
   const [relatedComments, setRelatedComments] = useState([]);
-  const [newCommentBody, setNewCommentBody] = useState("");
 
   useEffect(() => {
     fetchComments(review_id).then((response) => {
       setRelatedComments(response);
     });
-  }, []);
-
-  const submitHandler = (event) => {
-    event.preventDefault();
-    postNewComment(review_id, "grumpy19", newCommentBody)
-      .then(({ postedComment }) => {
-        setRelatedComments([postedComment, ...relatedComments]);
-        setNewCommentBody("");
-      })
-      .catch((error) => {});
-  };
+  }, [relatedComments]);
 
   if (!relatedComments[0]) {
-    return <p>Sorry, no comments yet</p>;
+    return (
+      <div>
+        <PostCommentComponent
+          review_id={review_id}
+          setRelatedComments={setRelatedComments}
+        />
+        <p>Sorry, no comments yet</p>
+      </div>
+    );
   } else {
     return (
       <div>
-        <section>
-          <h4>Writte a comment</h4>
-          <form onSubmit={submitHandler}>
-            <label htmlFor="userNameInput">Your Username: grumpy19</label>
-            <div>
-              <label htmlFor="commentInput">Your Comment</label>
-              <input
-                id="commentInput"
-                type="text"
-                value={newCommentBody}
-                onChange={(event) => {
-                  setNewCommentBody(event.target.value);
-                }}
-              ></input>
-            </div>
-            <button type="submit">Add a comment</button>
-          </form>
-        </section>
+        <PostCommentComponent
+          review_id={review_id}
+          setRelatedComments={setRelatedComments}
+        />
         <h4>Existing Comments</h4>
         <section className="comments-section">
           {relatedComments.map((comment) => {

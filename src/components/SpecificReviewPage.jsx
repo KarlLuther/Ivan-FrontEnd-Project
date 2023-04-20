@@ -20,7 +20,7 @@ const SpecificReviewPage = () => {
   if (isLoading) return <IsLoadingComponent />;
   return (
     <div>
-      <section className="review-section">
+      <section className="review-section component-container">
         <h2>{reviewToRender.title}</h2>
         <p>
           <span className="bold-text">{reviewToRender.category}</span>

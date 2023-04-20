@@ -18,15 +18,27 @@
   text-transform: uppercase;
 }
 
+.component-container {
+  padding-top: 6%;
+}
+
 /* /////////////////////// */
 /* HEADER */
 /* /////////////////////// */
 
 header {
-  padding: 20px;
   background-color: #e03131;
   height: 100px;
   color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 8%;
+  display: flex;
+  justify-content: space-between;
+  padding-left: 60px;
+  padding-right: 60px;
 }
 
 .nav-link {
@@ -58,6 +70,7 @@ header {
 #commentInput {
   height: 50px;
   width: 150px;
+  font-family: Arial, sans-serif;
 }
 
 h4 {

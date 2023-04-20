@@ -1,5 +1,9 @@
 const Homepage = () => {
-  return <p>Homepage</p>;
+  return (
+    <section className="component-container">
+      <p>Homepage</p>
+    </section>
+  );
 };
 
 export default Homepage;
