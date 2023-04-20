@@ -17,6 +17,10 @@ const Header = () => {
           </Link>
         </nav>
       </div>
+      <div className="user-icon">
+        <p>User:</p>
+        <p>grumpy19</p>
+      </div>
     </header>
   );
 };
