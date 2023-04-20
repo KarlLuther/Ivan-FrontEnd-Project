@@ -54,3 +54,8 @@ header {
 .comment-card {
   margin-bottom: 20px;
 }
+
+#commentInput {
+  height: 50px;
+  width: 150px;
+}

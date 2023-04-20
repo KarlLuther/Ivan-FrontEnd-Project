@@ -15,7 +15,6 @@ const CommentsSection = ({ review_id }) => {
   } else {
     return (
       <section className="comments-section">
-        <h3>Comments</h3>
         {relatedComments.map((comment) => {
           const { author, body, created_at, votes, comment_id } = comment;
           return (

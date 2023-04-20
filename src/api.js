@@ -32,3 +32,17 @@ export const fetchComments = (review_id) => {
     return response.data.comments;
   });
 };
+
+export const postNewComment = (review_id, username, body) => {
+  const jsonToPost = {
+    username: `${username}`,
+    body: `${body}`,
+  };
+
+  return ncGamesApi
+    .post(`/reviews/${review_id}/comments`, jsonToPost)
+    .then((response) => {
+      console.log(response.data);
+      return response.data;
+    });
+};
