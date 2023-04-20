@@ -4,7 +4,6 @@ import { fetchReviewById } from "../api";
 import IsLoadingComponent from "../supplementoryComponents/isLoadingPage";
 import { modifyDate } from "../api";
 import CommentsSection from "../supplementoryComponents/CommentsSection";
-import PostCommentSection from "../supplementoryComponents/PostCommentSection";
 
 const SpecificReviewPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -37,7 +36,6 @@ const SpecificReviewPage = () => {
         </p>
       </section>
       <h3>Comments</h3>
-      <PostCommentSection review_id={review_id} />
       <CommentsSection review_id={review_id} />
     </div>
   );
