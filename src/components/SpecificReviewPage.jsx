@@ -20,15 +20,37 @@ const SpecificReviewPage = () => {
   }, []);
 
   const reviewLikeHandler = () => {
-    patchReviewVotes(review_id, 1).then((response) => {
-      setReviewToRender(response);
-    });
+    if (!likeActive) {
+      patchReviewVotes(review_id, 1)
+        .then((response) => {
+          setReviewToRender(response);
+        })
+        .finally(() => {
+          if (!likeActive) {
+            setLikeActive(true);
+          }
+          if (dislikeActive) {
+            setDislikeActive(false);
+          }
+        });
+    }
   };
 
   const reviewDislikeHandler = () => {
-    patchReviewVotes(review_id, -1).then((response) => {
-      setReviewToRender(response);
-    });
+    if (!dislikeActive) {
+      patchReviewVotes(review_id, -1)
+        .then((response) => {
+          setReviewToRender(response);
+        })
+        .finally(() => {
+          if (!dislikeActive) {
+            setDislikeActive(true);
+          }
+          if (likeActive) {
+            setLikeActive(false);
+          }
+        });
+    }
   };
 
   if (isLoading) return <IsLoadingComponent />;
