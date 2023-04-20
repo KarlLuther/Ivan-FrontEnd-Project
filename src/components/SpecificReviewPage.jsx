@@ -8,6 +8,7 @@ const SpecificReviewPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [reviewToRender, setReviewToRender] = useState();
   const { review_id } = useParams();
+  // const [amountOfVotes, setAmountOfVotes] = useState("");
 
   const [dislikeActive, setDislikeActive] = useState(false);
   const [likeActive, setLikeActive] = useState(false);
@@ -15,6 +16,7 @@ const SpecificReviewPage = () => {
   useEffect(() => {
     fetchReviewById(review_id).then((response) => {
       setReviewToRender(response);
+      // setAmountOfVotes(reviewToRender.votes);
       setIsLoading(false);
     });
   }, []);
