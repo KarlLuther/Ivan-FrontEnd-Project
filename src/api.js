@@ -39,7 +39,6 @@ export const patchReviewVotes = (review_id, number) => {
       inc_votes: number,
     })
     .then((response) => {
-      console.log(response);
       return response.data.review;
     });
 };
