@@ -3,57 +3,19 @@ import { useParams } from "react-router-dom";
 import { fetchReviewById, patchReviewVotes, modifyDate } from "../api";
 import IsLoadingComponent from "../supplementoryComponents/isLoadingPage";
 import CommentsSection from "../supplementoryComponents/CommentsSection";
+import VoteSection from "../supplementoryComponents/VoteSection";
 
 const SpecificReviewPage = () => {
   const [isLoading, setIsLoading] = useState(true);
   const [reviewToRender, setReviewToRender] = useState();
   const { review_id } = useParams();
-  // const [amountOfVotes, setAmountOfVotes] = useState("");
-
-  const [dislikeActive, setDislikeActive] = useState(false);
-  const [likeActive, setLikeActive] = useState(false);
 
   useEffect(() => {
     fetchReviewById(review_id).then((response) => {
       setReviewToRender(response);
-      // setAmountOfVotes(reviewToRender.votes);
       setIsLoading(false);
     });
   }, []);
-
-  const reviewLikeHandler = () => {
-    if (!likeActive) {
-      patchReviewVotes(review_id, 1)
-        .then((response) => {
-          setReviewToRender(response);
-        })
-        .finally(() => {
-          if (!likeActive) {
-            setLikeActive(true);
-          }
-          if (dislikeActive) {
-            setDislikeActive(false);
-          }
-        });
-    }
-  };
-
-  const reviewDislikeHandler = () => {
-    if (!dislikeActive) {
-      patchReviewVotes(review_id, -1)
-        .then((response) => {
-          setReviewToRender(response);
-        })
-        .finally(() => {
-          if (!dislikeActive) {
-            setDislikeActive(true);
-          }
-          if (likeActive) {
-            setLikeActive(false);
-          }
-        });
-    }
-  };
 
   if (isLoading) return <IsLoadingComponent />;
   return (
@@ -72,19 +34,11 @@ const SpecificReviewPage = () => {
         <p>
           <span className="bold-text">Owner:</span> {reviewToRender.owner}
         </p>
-        <div>
-          <p>Votes: {reviewToRender.votes}</p>
-          <button onClick={reviewLikeHandler} clicked="false" id="like-review">
-            Like it!
-          </button>
-          <button
-            onClick={reviewDislikeHandler}
-            clicked="false"
-            id="dislike-review"
-          >
-            Dislike it!
-          </button>
-        </div>
+        <VoteSection
+          reviewToRender={reviewToRender}
+          review_id={review_id}
+          setReviewToRender={setReviewToRender}
+        />
       </section>
       <CommentsSection review_id={review_id} />
     </div>
