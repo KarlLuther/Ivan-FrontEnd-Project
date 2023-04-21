@@ -2,20 +2,25 @@ import { useState } from "react";
 import { patchReviewVotes } from "../api";
 
 const VoteSection = ({ reviewToRender, review_id, setReviewToRender }) => {
-  // const [amountOfVotes, setAmountOfVotes] = useState("");
-  const [disabledButton, setDisabledButton] = useState(false);
   const [initialVotes, setInitialVotes] = useState(reviewToRender.votes);
   const [isLoading, setIsLoading] = useState("");
+  const [disableLikeButton, setDisableLikeButton] = useState(false);
+  const [disableDisLikeButton, setDisableDisLikeButton] = useState(false);
 
   const voteChangeHandler = (event) => {
     setIsLoading("Sending your precious opinion");
     const diff = event.target.getAttribute("meta") === "like-button" ? 1 : -1;
     setInitialVotes(initialVotes + diff);
-    setDisabledButton(true);
+    setDisableLikeButton(true);
+    setDisableDisLikeButton(true);
     patchReviewVotes(review_id, diff)
       .then((Response) => {
         setReviewToRender(Response);
-        setDisabledButton(false);
+        if (diff === 1) {
+          setDisableDisLikeButton(false);
+        } else {
+          setDisableLikeButton(false);
+        }
         setIsLoading("");
       })
       .catch(() => {
@@ -32,7 +37,7 @@ const VoteSection = ({ reviewToRender, review_id, setReviewToRender }) => {
         <button
           id="like-review"
           onClick={voteChangeHandler}
-          disabled={disabledButton}
+          disabled={disableLikeButton}
           meta="like-button"
         >
           Like it!
@@ -40,7 +45,7 @@ const VoteSection = ({ reviewToRender, review_id, setReviewToRender }) => {
         <button
           id="dislike-review"
           onClick={voteChangeHandler}
-          disabled={disabledButton}
+          disabled={disableDisLikeButton}
           meta="dislike-button"
         >
           Dislike it!
@@ -52,20 +57,3 @@ const VoteSection = ({ reviewToRender, review_id, setReviewToRender }) => {
 };
 
 export default VoteSection;
-
-// const reviewDislikeHandler = () => {
-//   if (!dislikeActive) {
-//     patchReviewVotes(review_id, -1)
-//       .then((response) => {
-//         setReviewToRender(response);
-//       })
-//       .finally(() => {
-//         if (!dislikeActive) {
-//           setDislikeActive(true);
-//         }
-//         if (likeActive) {
-//           setLikeActive(false);
-//         }
-//       });
-//   }
-// };

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchReviewById, patchReviewVotes, modifyDate } from "../api";
+import { fetchReviewById, modifyDate } from "../api";
 import IsLoadingComponent from "../supplementoryComponents/isLoadingPage";
 import CommentsSection from "../supplementoryComponents/CommentsSection";
 import VoteSection from "../supplementoryComponents/VoteSection";
