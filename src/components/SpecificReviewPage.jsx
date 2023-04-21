@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import { fetchReviewById } from "../api";
+import { fetchReviewById, modifyDate } from "../api";
 import IsLoadingComponent from "../supplementoryComponents/isLoadingPage";
-import { modifyDate } from "../api";
 import CommentsSection from "../supplementoryComponents/CommentsSection";
+import VoteSection from "../supplementoryComponents/VoteSection";
 
 const SpecificReviewPage = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -34,6 +34,11 @@ const SpecificReviewPage = () => {
         <p>
           <span className="bold-text">Owner:</span> {reviewToRender.owner}
         </p>
+        <VoteSection
+          reviewToRender={reviewToRender}
+          review_id={review_id}
+          setReviewToRender={setReviewToRender}
+        />
       </section>
       <CommentsSection review_id={review_id} />
     </div>
